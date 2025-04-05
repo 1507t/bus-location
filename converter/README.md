@@ -16,7 +16,7 @@ system,real
 ```
 
 > [!NOTE]
-> system_number列はヘッダ行を除いて昇順ソートされている必要があります。
+> system列はヘッダ行を除いて昇順ソートされている必要があります。
 
 ## Example
 
