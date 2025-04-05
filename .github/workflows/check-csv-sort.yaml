@@ -1,0 +1,36 @@
+name: Check csv sort 
+
+on:
+  pull_request:
+    paths:
+      - 'converter/*.csv'
+
+jobs:
+  check-csv-sort:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Check csv sort order
+        run: |
+          ALL_CSVS=$(find converter/ -type f -name '*.csv')
+          
+          if [ -z "$ALL_CSVS" ]; then
+            echo "No CSV files to check."
+            exit 0
+          fi
+          
+          echo "CSV files to check:"
+          echo "$ALL_CSVS"
+
+          for file in $ALL_CSVS; do
+            echo "Checking $file"
+            python scripts/check_csv_sort.py "$file"
+          done
