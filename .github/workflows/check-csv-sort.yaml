@@ -20,17 +20,17 @@ jobs:
 
       - name: Check csv sort order
         run: |
-          CHANGED_CSVS=$(git diff --name-only origin/master | grep '^data/.*\.csv$' || true)
+          ALL_CSVS=$(find converter/ -type f -name '*.csv')
           
-          if [ -z "$CHANGED_CSVS" ]; then
+          if [ -z "$ALL_CSVS" ]; then
             echo "No CSV files to check."
             exit 0
           fi
           
           echo "CSV files to check:"
-          echo "$CHANGED_CSVS"
+          echo "$ALL_CSVS"
 
-          for file in $CHANGED_CSVS; do
+          for file in $ALL_CSVS; do
             echo "Checking $file"
             python scripts/check_csv_sort.py "$file"
           done
