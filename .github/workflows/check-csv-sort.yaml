@@ -18,6 +18,9 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install packages
+        run: pip install -r requirements.txt
+
       - name: Check csv sort order
         run: |
           ALL_CSVS=$(find converter/ -type f -name '*.csv')

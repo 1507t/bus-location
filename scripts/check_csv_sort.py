@@ -1,12 +1,13 @@
 import csv
 import sys
+from natsort import natsorted
 
 def is_sorted_column(file_path):
     with open(file_path, newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         header = next(reader, None)
         column = [row[0] for row in reader if row]
-        return column == sorted(column)
+        return column == natsorted(column)
 
 if __name__ == "__main__":
     csv_path = sys.argv[1]
